@@ -1,24 +1,27 @@
 extends base
 
 block content
-    center
-        div(style="margin: 10px; max-width: 450px;")
-            each category in productCategories 
-                if category._id !== productCategory
-                    a(href=`/products/category/${category._id}`, style="margin: 10px; text-decoration: none;") #{category._id}
+    div(class="container mt-5")
+        div(class="row")
+            div(class="col-4")
+                div(class="sticky-top")
+                    ul(class="list-group p-5 mt-5")
+                        h3(class="text-center fw-bold") Categories
+                        each category in productCategories 
+                            a(class=`list-group-item list-group-item-action text-decoration-none border-warning text-center text-dark text-capitalize ${category._id === productCategory ? 'active bg-warning' : "bg-light"}`, href=`/products/category/${category._id}`) #{category._id}
 
-    center
-        div(style="margin: 10px; max-width: 250px;")
-            each option in [{value: 'default', text: "Default"}, {value: 'ascprice', text: 'Ascending'}, {value: 'descprice', text: 'Descending'}]
-                a(href=`${pageUrl}?sort=${option.value}`, style="margin: 10px; text-decoration: none;") #{option.text}
-    
-    each product in products 
-        center
-            div(style="border: 1px grey solid; margin: 10px; max-width: 270px;")
-                p= product.title.substr(0, 35) + '...'
-                a(href=`/products/${product._id}`) 
-                    img(src=product.image, style="width:150px;height:150px", href="/")
-                p $#{product.price}
+                    ul(class="list-group p-5")
+                        h3(class="text-center fw-bold text-color-danger") Sort 
+                        each option in [{value: 'default', text: "Default"}, {value: 'ascprice', text: 'Ascending'}, {value: 'descprice', text: 'Descending'}]
+                            a(class=`list-group-item text-center border-warning text-decoration-none text-dark ${sortType === option.value ? "active bg-warning" : "bg-light"}`, href=`${pageUrl}?sort=${option.value}`) #{option.text}
 
-                form(action=pageUrl, method="post")
-                    button(type="submit", style="margin: 10px;") Add to Cart
+            div(class="col-8")
+                div(class="row")
+                    each product in products
+                        div(class="col-lg-4 d-flex align-items-stretch mt-5")
+                            div(class="card")
+                                h6(class="card-title text-center m-2")= product.title.substr(0, 16) + '...'
+                                div(class="card-body bg-white")
+                                    img(class="card-img-top mx-auto", src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg")
+                                div(class="card-footer mx-auto bg-white")
+                                    button(class="btn btn-outline-warning") $#{product.price} Add to Cart

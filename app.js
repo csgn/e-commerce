@@ -48,7 +48,7 @@ function main() {
         if (error)
             console.error(error);
         else
-            console.log(`System Info: Listening from ${process.env.PORT || 3000}`);
+            console.log(`System Info: Listening from http://127.0.0.1:${process.env.PORT || 3000}`);
     })
 }
 

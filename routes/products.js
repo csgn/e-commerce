@@ -2,20 +2,24 @@ const router = require('express').Router()
 const ProductController = require('../controller/product-controller')
 
 router.get('/', async (req, res) => {
+    const sortType = ProductController.queryFilter(req.query)
     const products = await ProductController.aggregate({
-        $sort: ProductController.queryFilter(req.query)
+        $sort: sortType[1]
     })
 
-    const productCategories = await ProductController.aggregate({
-        $group: {
-            _id: "$category"
+    const productCategories = await ProductController.aggregate(
+        {
+            $group: {
+                _id: "$category"
+            }
         }
-    })
-
+    )
+    
     res.render('products', { 
         pageHeader: `Products (${products.length})`,
         pageUrl: "/products",
         productCategories,
+        sortType: sortType[0],
         products 
     })
 })
@@ -31,6 +35,7 @@ router.get('/categories', async (req, res) => {
 })
 
 router.get('/category/:category', async (req, res) => {
+    const sortType = ProductController.queryFilter(req.query)
     const products = await ProductController.aggregate([
         {
             $match: {
@@ -38,7 +43,7 @@ router.get('/category/:category', async (req, res) => {
             }
         },
         {
-            $sort: ProductController.queryFilter(req.query)
+            $sort: sortType[1]
         }
     ])
 
@@ -56,6 +61,7 @@ router.get('/category/:category', async (req, res) => {
             pageUrl: `/products/category/${req.params.category}`,
             productCategory: req.params.category,
             productCategories,
+            sortType: sortType[0],
             products,
         })
     }
