@@ -1,3 +1,3 @@
 ## e-Commerce clone app
 
-![demo]("docs/demo.png")
+![demo](docs/demo.png)
