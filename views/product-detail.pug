@@ -1,0 +1,14 @@
+extends base
+
+block content
+    center
+        h1= product.title
+        div(style="margin: 10px;")
+                img(src=product.image, style="width:350px;height:350px")
+                h1 $#{product.price}
+
+                form(action=pageUrl, method="post")
+                    button(type="submit", style="margin: 10px; width: 100px; height: 50px") Add to Cart
+
+        div 
+            h3= product.description
