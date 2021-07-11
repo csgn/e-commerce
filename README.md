@@ -1,3 +1,7 @@
 ## e-Commerce clone app
 
-![demo](docs/demo.png)
+![demo](docs/productspage.png)
+
+![demo](docs/loginpage.png)
+
+![demo](docs/registerpage.png)
