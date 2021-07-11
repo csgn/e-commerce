@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const mongoose = require('mongoose')
-
+const session = require('express-session')
 
 async function configMongo() {
     try {
@@ -19,21 +19,29 @@ async function configMongo() {
 function configSets(app) {
     app.set('view engine', 'pug')
     app.set('views', __dirname + '/views')
+    app.set('trust proxy', 1)
 }
 
 function configUses(app, routes) {
     app.use(express.urlencoded())
     app.use(express.json())
+    app.use(session({
+        secret: 'e-commerce',
+        resave: false,
+        saveUninitialized: true,
+    }))
 
     /* ROUTES */
     app.use('/', routes.indexRouter)
     app.use('/products', routes.productsRouter)
+    app.use('/auth', routes.authRouter)
 }
 
 function configRoutes(app) {
     return {
         indexRouter: require('./routes/index'),
-        productsRouter: require('./routes/products')
+        productsRouter: require('./routes/products'),
+        authRouter: require('./routes/auth')
     }
 }
 

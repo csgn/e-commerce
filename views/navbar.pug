@@ -1,0 +1,23 @@
+nav(class="navbar navbar-expand-lg navbar-light bg-warning ml-auto")
+    div(class="container")
+        a(class="navbar-brand", href="/")
+            img(src="https://image.flaticon.com/icons/png/512/1170/1170576.png", width="32", height="32", class="d-inline-block align-text-bottom animate__animated animate__headShake")
+
+        ul(class="navbar-nav me-auto mb-2 mb-lg-0")
+            li(class="nav-item")
+                a(class="nav-link active fw-bold", aria-current="page", href="/products") Products
+            
+            if (!sessionIsExist)
+                li(class="nav-item")
+                    a(class="nav-link active fw-bold", aria-current="page", href="/auth/login") Login
+        
+        button(type="button" class="btn btn-dark text-warning position-relative", data-bs-toggle="offcanvas", data-bs-target="#openCartRight", aria-controls="openCartRight")
+            span(class="fas fa-shopping-basket animate__animated animate__swing")
+            span(class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark") 0
+                span(class="visually-hidden") carts
+
+        form(class="d-flex p-2", method="get", action="/")
+            - var inputName = "Search"
+            input(class="form-control me-2", type="search", placeholder=inputName, aria-label=inputName)
+            button(class="btn btn-outline-dark", type="submit")
+                span(class="fas fa-search")

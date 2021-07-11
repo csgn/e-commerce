@@ -2,7 +2,8 @@ const router = require('express').Router()
 
 router.get('/', (req, res) => {
     res.render('base', { 
-        pageHeader: "Home"
+        pageHeader: "Home",
+        sessionIsExist: req.session.loggedIn ? true: false
     })
 })
 

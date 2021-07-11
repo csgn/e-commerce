@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
     res.render('products', { 
         pageHeader: `Products (${products.length})`,
         pageUrl: "/products",
+        sessionIsExist: req.session.loggedIn ? true: false,
         productCategories,
         sortType: sortType[0],
         products 
@@ -59,6 +60,7 @@ router.get('/category/:category', async (req, res) => {
         res.render('products', {
             pageHeader: `Products - ${req.params.category} (${products.length})`,
             pageUrl: `/products/category/${req.params.category}`,
+            sessionIsExist: req.session.loggedIn ? true: false,
             productCategory: req.params.category,
             productCategories,
             sortType: sortType[0],
@@ -71,16 +73,12 @@ router.get('/:id', async (req, res) => {
     try {
         const product = await ProductController.findById(req.params.id, null)
         res.render('product-detail', {
+            sessionIsExist: req.session.loggedIn ? true: false,
             product
         })
     } catch (error) {
         res.redirect('/products') // 404
     }
-})
-
-
-/* Add to Cart */
-router.post('/', (req, res) => {
 })
 
 module.exports = router

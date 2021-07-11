@@ -18,8 +18,8 @@ block content
             div(class="col-8")
                 div(class="row")
                     each product in products
-                        div(class="col-lg-4 d-flex align-items-stretch mt-5")
-                            div(class="card")
+                        div(class="col-lg-4 d-flex align-items-stretch mt-5 animate__animated animate__fadeIn")
+                            div(class="card shadow-sm")
                                 h6(class="card-title text-center m-2")= product.title.substr(0, 16) + '...'
                                 div(class="card-body bg-white")
                                     img(class="card-img-top mx-auto", src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg")
