@@ -19,15 +19,29 @@ html(lang="en")
                     li(class="nav-item")
                         a(class="nav-link active fw-bold", aria-current="page", href="/products") Products
                 
-                form(class="d-flex")
-                    input(class="form-control me-2", type="search", placeholder="Search", aria-label="Search", action="/")
-                    button(class="btn btn-outline-dark", type="submit") Search
+                button(type="button" class="btn btn-dark text-warning position-relative", data-bs-toggle="offcanvas", data-bs-target="#openCartRight", aria-controls="openCartRight")
+                    span(class="fas fa-shopping-basket")
+                    span(class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark") 4
+                        span(class="visually-hidden") carts
+
+                form(class="d-flex p-2", method="get", action="/")
+                    - var inputName = "Search"
+                    input(class="form-control me-2", type="search", placeholder=inputName, aria-label=inputName)
+                    button(class="btn btn-outline-dark", type="submit")
+                        span(class="fas fa-search")
+
+        div(class="offcanvas offcanvas-end", tabindex="-1", id="openCartRight", aria-labelledby="openCartRightLabel")
+            div(class="offcanvas-header")
+                h5(id="openCartRightLabel") Cart
+                button(type="button", class="btn-close text-reset", data-bs-dismiss="offcanvas", aria-label="Close")
+            div(class="offcanvas-body")
 
         block content
             div(class="container")
     
 
         div(class="text-center p-5 bg-dark container-fluid mt-5", style="height: 26rem;")
-            a(class="text-reset fw-bold", href="https://mdbootstrap.com/")
+
 
         script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js", integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM", crossorigin="anonymous") 
+        script(src="https://kit.fontawesome.com/04cc04ac80.js", crossorigin="anonymous")

@@ -24,4 +24,27 @@ block content
                                 div(class="card-body bg-white")
                                     img(class="card-img-top mx-auto", src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg")
                                 div(class="card-footer mx-auto bg-white")
-                                    button(class="btn btn-outline-warning") $#{product.price} Add to Cart
+                                    button(type="button", class="btn btn-outline-warning", data-bs-toggle="modal", data-bs-target=`#detailModal-${product._id}`)
+                                        span(class="fas fa-dollar-sign")
+                                        i= product.price
+
+                        div(class="modal fade", id=`detailModal-${product._id}`, tabindex="-1", aria-labelledby=`detailModalLabel-${product._id}`, aria-hidden="true")
+                            div(class="modal-dialog modal-dialog-centered modal-dialog-scrollable")
+                                div(class="modal-content")
+                                    div(class="modal-header")
+                                        h5(class="modal-title p-2 text-center text-secondary", id=`detailModalLabel-${product._id}`)= product.title
+                                        button(type="button", class="btn-close", data-bs-dismiss="modal", aria-label="Close")
+                                    div(class="modal-body")
+                                        img(class="card-img-top mx-auto", src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg")
+                                        p(class="m-3 text-center text-secondary")= product.description
+
+                                    div(class="modal-footer mx-auto")
+                                        span(class="badge bg-secondary rounded-pill") $ #{product.price}
+                                        a(type="button", class="btn btn-dark text-warning", href=`/products/${product._id}`)
+                                            span(class="fas fa-info-circle p-2")
+                                            i(class="p-2") Go to Detail
+                                        form(class="d-flex", method="post", action="/products")
+                                            input(type="text", name="productId", class="d-none", value=product._id)
+                                            button(type="submit", class="btn btn-warning")
+                                                span(class="fas fa-shopping-basket p-2")
+                                                i(class="p-2") Add to Cart

@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
             }
         }
     )
-    
+
     res.render('products', { 
         pageHeader: `Products (${products.length})`,
         pageUrl: "/products",
@@ -76,6 +76,11 @@ router.get('/:id', async (req, res) => {
     } catch (error) {
         res.redirect('/products') // 404
     }
+})
+
+
+/* Add to Cart */
+router.post('/', (req, res) => {
 })
 
 module.exports = router
